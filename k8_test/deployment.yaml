@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pet-shop
+  namespace: prod # Our "Neighborhood"
+spec:
+  replicas: 3 # The "Manager" ensures 3 bags are always ready
+  selector:
+    matchLabels:
+      app: pet-shop
+  template:
+    metadata:
+      labels:
+        app: pet-shop # This "Tag" is how the Service finds these Pods
+    spec:
+      containers:
+      - name: pet-shop-container
+        image: yourname/pet-shop:v1 # The "Box" we built with the Dockerfile
+        ports:
+        - containerPort: 5000 # The "Exhaust" port from our code
+        
+        # INJECTING SETTINGS (The "Note on the Fridge")
+        env:
+        - name: THEME_COLOR
+          valueFrom:
+            configMapKeyRef:
+              name: shop-config
+              key: theme-color
+              
+        # INJECTING SECRETS (The "Safe")
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: shop-secrets
+              key: db-password
+
+        # THE PULSE (Health Check)
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10

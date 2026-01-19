@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pet-shop-app
+spec
+  project: default
+  source: 
+    repoURL: 'https://github.com/bigtheophilus/pet-shop-gitops'
+    targetRevision: HEAD
+    path: manifest
+  destination:
+    server :'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+       prune: true
+       selfHeal: true
