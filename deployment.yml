@@ -1,0 +1,21 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t my-python-app .
+
+      - name: Run tests
+        run: pytest
+
+      - name: Push to registry
+        run: echo "Push to ECR, ACR, or Docker Hub here"
