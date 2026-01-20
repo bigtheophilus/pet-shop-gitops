@@ -1,3 +1,9 @@
+....PET-SHOP-GITOPS PROJECT...
+
+THIS PROJECT WAS SELF INITIATED
+
+ALL FILES SELF CODED WITH THE OF GEMINI
+
 ------Deployment------
 What is a Virtual Environment?
 A virtual environment in Python is an isolated environment on your computer, where you can run and test your Python projects.
@@ -39,3 +45,16 @@ Deactivate Virtual Environment: "Deactivate"
 
 then git push to my main branch in github.
 
+TO CONTAINIRIZE THE APPLICATION
+
+Ran: "docker build -t my-python-app" .(this build the image)
+
+Ran: "docker images" to view the built image
+
+run and a container:
+
+Ran: "docker run -d -p 5000:5000 my-python-app"
+
+NOTE: ensure your docker desktop is up and running or you install docker on your virtual machine.
+
+on the browser: "localhost:5000".
